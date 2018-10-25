@@ -5,11 +5,11 @@ Writing functions
 x = rnorm(25, mean = 5, sd = 3)
 
 (x - mean(x)) / sd(x)
-##  [1] -1.12113997 -0.67940582  2.10344866  0.88236568 -0.23330427
-##  [6]  0.21084551 -1.01918143 -0.19604083  0.22622366 -1.01738521
-## [11] -0.19779431  1.75051576  2.58305550  0.50379333 -0.56409559
-## [16] -0.35373509 -0.83207535 -0.33101538 -1.31742490 -0.99670181
-## [21] -0.18759629  0.24050082 -0.01665178  0.81088951 -0.24809039
+##  [1]  0.3376508  0.4270091 -0.1641960 -0.9581860  1.2182554  0.7871590
+##  [7] -2.1894656  0.6703307  0.9219803 -0.4155782  0.5082260 -0.3424310
+## [13] -1.8714994  1.7746182 -1.0253824 -0.4980498  0.9991217 -0.8131618
+## [19]  0.2501420 -1.2685375 -0.6713219  0.9004561  0.8517252  0.8244998
+## [25] -0.2533646
 ```
 
 ``` r
@@ -21,37 +21,37 @@ z_scores = function(x) {
 }
 
 z_scores(x)
-##  [1] -1.12113997 -0.67940582  2.10344866  0.88236568 -0.23330427
-##  [6]  0.21084551 -1.01918143 -0.19604083  0.22622366 -1.01738521
-## [11] -0.19779431  1.75051576  2.58305550  0.50379333 -0.56409559
-## [16] -0.35373509 -0.83207535 -0.33101538 -1.31742490 -0.99670181
-## [21] -0.18759629  0.24050082 -0.01665178  0.81088951 -0.24809039
+##  [1]  0.3376508  0.4270091 -0.1641960 -0.9581860  1.2182554  0.7871590
+##  [7] -2.1894656  0.6703307  0.9219803 -0.4155782  0.5082260 -0.3424310
+## [13] -1.8714994  1.7746182 -1.0253824 -0.4980498  0.9991217 -0.8131618
+## [19]  0.2501420 -1.2685375 -0.6713219  0.9004561  0.8517252  0.8244998
+## [25] -0.2533646
 ```
 
 ``` r
 unif_sample = runif(100)
 
 z_scores(x = unif_sample)
-##   [1]  1.068860924  0.181125849 -1.515955354 -1.063344077  1.671540108
-##   [6] -0.943585256  0.056057678  0.699728593  1.012956488  1.201352823
-##  [11] -0.305525511 -1.254749300 -1.630706240  0.111820365 -1.261263348
-##  [16] -0.852013639  0.293182106 -0.669579983  0.034543357 -1.219680837
-##  [21] -0.765295951  1.496252521  0.825811615 -1.654099936  0.294510014
-##  [26]  0.042729884  1.156014292 -0.261414316  0.490687383 -1.362697192
-##  [31] -1.648508963 -1.077674958  1.298390351  0.708817506  0.747078117
-##  [36] -0.843463251 -0.823413734  1.789700534  1.342093198 -0.463019945
-##  [41]  1.713932048 -0.132277021 -0.315245675 -0.049876500 -1.022675226
-##  [46] -1.031458840 -0.125772769  0.020373621  1.457367964 -1.366779879
-##  [51] -0.112773706 -0.243423961 -1.116085198 -0.276469555  0.289636949
-##  [56]  1.788747946 -1.020320310  1.117500334 -0.716124240 -0.498975199
-##  [61]  0.081869075 -0.945392963  1.053633041  1.608762236  0.422677173
-##  [66]  1.020777756 -1.324053736 -0.639301198 -0.067679495  0.372038709
-##  [71]  0.174383522 -1.088464602 -1.192918806  0.991147325 -0.891894298
-##  [76]  0.789380393 -0.936490946  1.281218827 -1.368473692 -0.547755282
-##  [81]  0.942284769 -0.007858986  0.117766119 -1.125397635 -1.487407694
-##  [86]  1.151356785 -0.432784391  1.236349829  1.792122493 -0.331855725
-##  [91] -0.607596860  0.903417966  1.337903120  1.637608703 -0.702736309
-##  [96]  1.164546558  1.083986477 -0.191598381 -1.174417359  0.634284789
+##   [1]  0.6908737139 -0.4133734476  1.5880922078 -0.8699943264  1.3725144043
+##   [6]  0.1896359904 -0.8728896470  1.3228751479 -0.6021692903  0.8444178698
+##  [11] -0.6702565517 -0.0652335321  1.4751976408 -1.1338431513  1.4255838355
+##  [16] -0.0003614552 -0.7669549890  0.6592507142  0.2993330478  1.4465601475
+##  [21] -1.3135056094  0.7838875943 -1.1276504342 -1.5827744523  1.0101573781
+##  [26]  0.6825240645 -1.1133973164  1.1400174297 -1.1939101783  1.0501792665
+##  [31] -1.0382432087 -0.0190293114  1.4260257287 -1.1852344227  1.0562259973
+##  [36] -1.4723987062  1.6180491906  0.2780332494 -0.7665473131  0.4677413189
+##  [41] -0.6092205673 -0.1334772308  0.1797236381  0.6787339982  0.0843355540
+##  [46]  0.2094704812  1.1202670862 -0.5923037875  0.5510415343  1.4423638710
+##  [51] -1.0149270573 -1.1732900276 -1.4852599185 -0.2037734095 -0.9557148729
+##  [56]  1.1681731485  0.9652984290  0.2378921618  1.5675618916 -0.2322306698
+##  [61]  0.6100204574 -0.3614428387 -1.4757569805  1.0831873045  1.0643185475
+##  [66] -1.5302696560 -1.3450099436 -0.4364587561  0.3363791413  0.2636183710
+##  [71] -1.2807626225  0.8024780369 -0.4974905926 -1.4919030711 -0.5885628264
+##  [76] -0.3949005327 -0.4857856708  0.4830342210 -1.3535259990 -0.6549912803
+##  [81]  0.9652755908  0.4657080871  0.3387532236  0.8411718460 -1.1239624192
+##  [86]  1.4338415071 -1.3584751769 -1.3220773717  0.7537988300  1.2851707333
+##  [91] -1.3407750772 -0.5587953615 -1.3321406760  1.4438430177  0.8869517903
+##  [96] -0.1502571668  1.4526354069  0.5921289017 -1.5808455320 -0.8621983097
 ```
 
 Add checks
@@ -94,7 +94,7 @@ mean_and_sd(unif_sample)
 ## # A tibble: 1 x 2
 ##   mean_x  sd_x
 ##    <dbl> <dbl>
-## 1  0.479 0.287
+## 1  0.489 0.309
 ```
 
 Multiple Inputs
@@ -110,18 +110,18 @@ sim_data = tibble(
 
 sim_data
 ## # A tibble: 30 x 2
-##          x     y
-##      <dbl> <dbl>
-##  1  1.91    8.02
-##  2  2.39   10.9 
-##  3  1.21    6.49
-##  4  2.11    9.17
-##  5  0.912   2.29
-##  6  0.526   2.35
-##  7 -0.0732  2.29
-##  8  1.98    7.96
-##  9  0.867   2.99
-## 10  1.97    9.44
+##         x      y
+##     <dbl>  <dbl>
+##  1 -1.29   -1.48
+##  2  1.66    6.43
+##  3  1.11    6.31
+##  4  0.212   2.96
+##  5  1.12    4.82
+##  6  3.13   10.8 
+##  7  0.828   3.17
+##  8  0.616   4.50
+##  9  0.626   4.23
+## 10  2.21    9.84
 ## # ... with 20 more rows
 sim_data %>% 
   ggplot(aes(x = x, y = y)) + geom_point()
@@ -161,5 +161,122 @@ sim_regression(n = 100, beta0 = 0.2, beta1 = 1.3)
 ## # A tibble: 1 x 2
 ##   beta0_hat beta1_hat
 ##       <dbl>     <dbl>
-## 1   -0.0189      1.36
+## 1     0.119      1.27
+```
+
+Scraping Amazon example
+-----------------------
+
+``` r
+url = "https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&reviewerType=avp_only_reviews&sortBy=recent&pageNumber=1"
+
+dynamite_html = read_html(url)
+
+review_titles = dynamite_html %>%
+  html_nodes("#cm_cr-review_list .review-title") %>%
+  html_text()
+
+review_stars = dynamite_html %>%
+  html_nodes("#cm_cr-review_list .review-rating") %>%
+  html_text()
+
+review_text = dynamite_html %>%
+    html_nodes(".review-data:nth-child(4)") %>%
+    html_text()
+
+reviews = tibble(
+  title = review_titles,
+  stars = review_stars,
+  text = review_text
+)
+
+reviews
+## # A tibble: 10 x 3
+##    title                   stars       text                               
+##    <chr>                   <chr>       <chr>                              
+##  1 "Great \"Odd Ball\" mo~ 5.0 out of~ The dance scene was worth the time~
+##  2 Nostalgic Stupidity     4.0 out of~ This movie is dumb. I won't lie an~
+##  3 Happy                   5.0 out of~ Don't know why I lov this movie bu~
+##  4 Go watch THE ROCK or d~ 2.0 out of~ This movie is horrible. How do so ~
+##  5 My mom loves it         5.0 out of~ Got this for my mom for mother's d~
+##  6 Nothing Quite Like It.  5.0 out of~ So much fun watching these listles~
+##  7 Has pretty sweet bow s~ 5.0 out of~ Well, things are getting pretty se~
+##  8 Great                   5.0 out of~ Great                              
+##  9 Fast delivery           5.0 out of~ Bought as gift                     
+## 10 Lol                     5.0 out of~ Funny
+```
+
+Write a function to extract reviews
+
+``` r
+read_page_reviews <- function(url) {
+  
+  h = read_html(url)
+  
+  review_titles = h %>%
+    html_nodes("#cm_cr-review_list .review-title") %>%
+    html_text()
+  
+  review_stars = h %>%
+    html_nodes("#cm_cr-review_list .review-rating") %>%
+    html_text() %>%
+    str_extract("\\d") %>%
+    as.numeric()
+  
+  review_text = h %>%
+    html_nodes(".review-data:nth-child(4)") %>%
+    html_text()
+  
+  tibble(
+    title = review_titles,
+    stars = review_stars,
+    text = review_text
+  )
+}
+
+read_page_reviews(url)
+## # A tibble: 10 x 3
+##    title                     stars text                                   
+##    <chr>                     <dbl> <chr>                                  
+##  1 "Great \"Odd Ball\" movi~     5 The dance scene was worth the time spe~
+##  2 Nostalgic Stupidity           4 This movie is dumb. I won't lie and sa~
+##  3 Happy                         5 Don't know why I lov this movie but ido
+##  4 Go watch THE ROCK or dum~     2 This movie is horrible. How do so many~
+##  5 My mom loves it               5 Got this for my mom for mother's day, ~
+##  6 Nothing Quite Like It.        5 So much fun watching these listless pe~
+##  7 Has pretty sweet bow ski~     5 Well, things are getting pretty seriou~
+##  8 Great                         5 Great                                  
+##  9 Fast delivery                 5 Bought as gift                         
+## 10 Lol                           5 Funny
+```
+
+Extract a lot of reviews.
+
+``` r
+url_base = "https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&reviewerType=avp_only_reviews&sortBy=recent&pageNumber="
+urls = str_c(url_base, 1:5)
+
+dynamite_reviews = bind_rows(
+  read_page_reviews(urls[1]),
+  read_page_reviews(urls[2]),
+  read_page_reviews(urls[3]),
+  read_page_reviews(urls[4]),
+  read_page_reviews(urls[5])
+)
+
+dynamite_reviews
+## # A tibble: 50 x 3
+##    title                     stars text                                   
+##    <chr>                     <dbl> <chr>                                  
+##  1 "Great \"Odd Ball\" movi~     5 The dance scene was worth the time spe~
+##  2 Nostalgic Stupidity           4 This movie is dumb. I won't lie and sa~
+##  3 Happy                         5 Don't know why I lov this movie but ido
+##  4 Go watch THE ROCK or dum~     2 This movie is horrible. How do so many~
+##  5 My mom loves it               5 Got this for my mom for mother's day, ~
+##  6 Nothing Quite Like It.        5 So much fun watching these listless pe~
+##  7 Has pretty sweet bow ski~     5 Well, things are getting pretty seriou~
+##  8 Great                         5 Great                                  
+##  9 Fast delivery                 5 Bought as gift                         
+## 10 Lol                           5 Funny                                  
+## # ... with 40 more rows
 ```
