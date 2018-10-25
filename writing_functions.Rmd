@@ -204,4 +204,30 @@ dynamite_reviews = bind_rows(
 dynamite_reviews
 ```
 
+## LoTR
+
+loading LoTR data
+
+```{r, error = TRUE}
+lotr_load_and_tidy = function(path, range, movie_name) {
+  
+  df = readxl::read_excel(path, range = range) %>%
+    janitor::clean_names() %>%
+    gather(key = sex, value = words, female:male) %>%
+    mutate(race = tolower(race),
+           movie = movie_name)
+  
+  df
+  
+}
+
+lotr_tidy = 
+  bind_rows(
+    lotr_load_and_tidy("./data/LotR_Words.xlsx", "B3:D6", "fellowship_ring"),
+    lotr_load_and_tidy("./data/LotR_Words.xlsx", "F3:H6", "two_towers"),
+    lotr_load_and_tidy("./data/LotR_Words.xlsx", "J3:L6", "return_king")) %>%
+  select(movie, everything()) 
+
+lotr_tidy
+```
 
