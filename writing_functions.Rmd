@@ -43,4 +43,47 @@ z_scores(x = unif_sample)
 ```
 
 
+Add checks
+
+```{r}
+z_scores = function(x) {
+  
+  if (!is.numeric(x)) {
+    stop("Argument x should be numeric")
+  } else if (length(x) == 1) {
+    stop("Z scores cannot be computed for length 1 vectors")
+  }
+  
+  z = mean(x) / sd(x)
+  
+  z
+}
+```
+
+
+### mean
+
+```{r}
+mean_and_sd = function(x) {
+  
+  if (!is.numeric(x)) {
+    stop("Argument x should be numeric")
+  } else if (length(x) == 1) {
+    stop("Cannot be computed for length 1 vectors")
+  }
+  
+  tibble(
+  mean_x = mean(x),
+  sd_x = sd(x)
+)
+  
+ 
+}
+
+mean_and_sd(unif_sample)
+```
+
+
+
+
 
