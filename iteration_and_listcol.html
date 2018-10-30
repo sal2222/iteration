@@ -148,8 +148,8 @@ l
 ## [1]  TRUE FALSE
 ## 
 ## $summary
-##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## -2.787131 -0.669280 -0.006571  0.004607  0.675295  3.192590</code></pre>
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -3.01199 -0.68329 -0.01981 -0.01246  0.70018  2.74783</code></pre>
 </div>
 <div id="for-loops" class="section level2">
 <h2>for loops</h2>
@@ -163,14 +163,14 @@ l
 is.list(df)
 ## [1] TRUE
 df[[1]]
-##  [1] 3.1728982 3.3227473 4.1757981 3.8632460 2.0733623 2.1883721 0.3662667
-##  [8] 4.1324446 4.1120117 2.8550264 1.7179344 2.9455900 4.2067258 3.4165500
-## [15] 3.2286605 2.7624861 2.8974546 3.7206379 3.7297053 2.1050241
+##  [1] 1.9233393 1.6600265 4.3279375 2.2249346 4.1067572 2.8100025 3.7862814
+##  [8] 0.6745121 1.4831502 3.3494358 1.8318387 4.8473304 1.6399555 1.6223704
+## [15] 1.6912528 3.2019604 4.0516948 2.2204335 2.8520402 3.3491127
 df[[2]]
-##  [1]  8.2944476  1.1872162  0.2370033 -8.5045486  1.6264979  8.5488085
-##  [7] -0.7406257 -7.4056817  0.5921410 -3.0425639 -3.1578609  9.0380536
-## [13] -5.5515544 -0.4488600  2.0551805  2.4923993 -2.2119738  6.2654317
-## [19] -9.4073083 -0.2533367</code></pre>
+##  [1]  0.18866591 11.39681168 -1.32807766  1.51317127  2.27698034
+##  [6]  3.84708741  2.57930686  6.87959176  0.07233594 -0.16243198
+## [11] -0.27387835  9.34341193 -3.49584655  1.61731595 10.15429348
+## [16]  6.17556888 -2.63629886  3.29540861 11.42478741 -1.79567238</code></pre>
 <p>Let’s get a function.</p>
 <pre class="r"><code>mean_and_sd = function(x) {
   
@@ -194,17 +194,17 @@ mean_and_sd(df[[1]])
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  3.05 0.986
+## 1  2.68  1.15
 mean_and_sd(df[[2]])
 ## # A tibble: 1 x 2
-##      mean    sd
-##     &lt;dbl&gt; &lt;dbl&gt;
-## 1 -0.0194  5.38
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  3.05  4.68
 mean_and_sd(df[[3]])
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  10.0 0.190</code></pre>
+## 1  10.0 0.164</code></pre>
 <p>Write a for loop</p>
 <pre class="r"><code>output = vector(&quot;list&quot;, length = 4)
 output
@@ -234,25 +234,484 @@ output
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  3.05 0.986
+## 1  2.68  1.15
 ## 
 ## [[2]]
 ## # A tibble: 1 x 2
-##      mean    sd
-##     &lt;dbl&gt; &lt;dbl&gt;
-## 1 -0.0194  5.38
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  3.05  4.68
 ## 
 ## [[3]]
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  10.0 0.190
+## 1  10.0 0.164
 ## 
 ## [[4]]
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1 -3.28  1.09</code></pre>
+## 1 -3.15  1.30</code></pre>
+<p>Replace <code>for</code> loop with <code>map</code></p>
+<pre class="r"><code>
+output = map(df, mean_and_sd)
+output
+## $a
+## # A tibble: 1 x 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  2.68  1.15
+## 
+## $b
+## # A tibble: 1 x 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  3.05  4.68
+## 
+## $c
+## # A tibble: 1 x 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  10.0 0.164
+## 
+## $d
+## # A tibble: 1 x 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1 -3.15  1.30</code></pre>
+<p>Let’s try a different function</p>
+<pre class="r"><code>output = map(df, median)
+output
+## $a
+## [1] 2.517469
+## 
+## $b
+## [1] 1.947148
+## 
+## $c
+## [1] 10.03073
+## 
+## $d
+## [1] -3.180133
+
+output = map(df, summary)
+output
+## $a
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.6745  1.6834  2.5175  2.6827  3.4586  4.8473 
+## 
+## $b
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.4958 -0.1903  1.9471  3.0536  6.3516 11.4248 
+## 
+## $c
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   9.636   9.909  10.031  10.012  10.115  10.250 
+## 
+## $d
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -5.7669 -4.1311 -3.1801 -3.1459 -2.3523 -0.8418</code></pre>
+</div>
+<div id="map-variant" class="section level2">
+<h2>map variant</h2>
+<pre class="r"><code>
+output = map_df(df, mean_and_sd)
+output
+## # A tibble: 4 x 2
+##     mean    sd
+##    &lt;dbl&gt; &lt;dbl&gt;
+## 1   2.68 1.15 
+## 2   3.05 4.68 
+## 3  10.0  0.164
+## 4  -3.15 1.30
+
+output = map_dbl(df, median)
+output
+##         a         b         c         d 
+##  2.517469  1.947148 10.030734 -3.180133</code></pre>
+</div>
+<div id="code-syntax" class="section level2">
+<h2>code syntax</h2>
+<p>be clear about arguments</p>
+<pre class="r"><code>output = map(.x = df, ~ mean_and_sd(x = .x))
+output
+## $a
+## # A tibble: 1 x 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  2.68  1.15
+## 
+## $b
+## # A tibble: 1 x 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  3.05  4.68
+## 
+## $c
+## # A tibble: 1 x 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  10.0 0.164
+## 
+## $d
+## # A tibble: 1 x 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1 -3.15  1.30</code></pre>
+</div>
+<div id="revisit-napolean-dynamite" class="section level2">
+<h2>Revisit Napolean Dynamite</h2>
+<pre class="r"><code>read_page_reviews &lt;- function(url) {
+  
+  h = read_html(url)
+  
+  title = h %&gt;%
+    html_nodes(&quot;#cm_cr-review_list .review-title&quot;) %&gt;%
+    html_text()
+  
+  stars = h %&gt;%
+    html_nodes(&quot;#cm_cr-review_list .review-rating&quot;) %&gt;%
+    html_text() %&gt;%
+    str_extract(&quot;\\d&quot;) %&gt;%
+    as.numeric()
+  
+  text = h %&gt;%
+    html_nodes(&quot;.review-data:nth-child(4)&quot;) %&gt;%
+    html_text()
+  
+  data_frame(title, stars, text)
+}
+
+url_base = &quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=&quot;
+
+vec_urls = str_c(url_base, 1:5)
+
+vec_urls
+## [1] &quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=1&quot;
+## [2] &quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=2&quot;
+## [3] &quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=3&quot;
+## [4] &quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=4&quot;
+## [5] &quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=5&quot;
+
+# check that function works
+read_page_reviews(vec_urls[[1]])
+## # A tibble: 10 x 3
+##    title                                 stars text                       
+##    &lt;chr&gt;                                 &lt;dbl&gt; &lt;chr&gt;                      
+##  1 Great Movie                               5 Format: Prime VideoVerifie~
+##  2 True to life!                             5 Format: Prime VideoVerifie~
+##  3 Classic family friendly comedy kids ~     5 Format: Prime VideoVerifie~
+##  4 &quot;Great \&quot;Odd Ball\&quot; movie to watch&quot;       5 Format: Prime VideoVerifie~
+##  5 Nostalgic Stupidity                       4 Format: Prime VideoVerifie~
+##  6 Happy                                     5 Format: DVDVerified Purcha~
+##  7 Go watch THE ROCK or dumb &amp; dumber i~     2 Format: Prime VideoVerifie~
+##  8 My mom loves it                           5 Format: Blu-rayVerified Pu~
+##  9 Nothing Quite Like It.                    5 Format: Prime VideoVerifie~
+## 10 Has pretty sweet bow skills.              5 Format: Blu-rayVerified Pu~
+read_page_reviews(vec_urls[[2]])
+## # A tibble: 10 x 3
+##    title                                 stars text                       
+##    &lt;chr&gt;                                 &lt;dbl&gt; &lt;chr&gt;                      
+##  1 Great                                     5 Format: DVDVerified Purcha~
+##  2 Fast delivery                             5 Format: DVDVerified Purcha~
+##  3 Lol                                       5 Format: DVDVerified Purcha~
+##  4 Vote For Pedro                            5 Format: DVDVerified Purcha~
+##  5 So funny!                                 5 Format: Prime VideoVerifie~
+##  6 Great move                                5 Format: Prime VideoVerifie~
+##  7 Refund needed. Did not pay through A~     1 Format: Prime VideoVerifie~
+##  8 Need a laugh?                             5 Format: DVDVerified Purcha~
+##  9 The greatest!                             5 Format: Prime VideoVerifie~
+## 10 Five Stars                                5 Format: Prime VideoVerifie~
+
+reviews = map(vec_urls, read_page_reviews)
+reviews
+## [[1]]
+## # A tibble: 10 x 3
+##    title                                 stars text                       
+##    &lt;chr&gt;                                 &lt;dbl&gt; &lt;chr&gt;                      
+##  1 Great Movie                               5 Format: Prime VideoVerifie~
+##  2 True to life!                             5 Format: Prime VideoVerifie~
+##  3 Classic family friendly comedy kids ~     5 Format: Prime VideoVerifie~
+##  4 &quot;Great \&quot;Odd Ball\&quot; movie to watch&quot;       5 Format: Prime VideoVerifie~
+##  5 Nostalgic Stupidity                       4 Format: Prime VideoVerifie~
+##  6 Happy                                     5 Format: DVDVerified Purcha~
+##  7 Go watch THE ROCK or dumb &amp; dumber i~     2 Format: Prime VideoVerifie~
+##  8 My mom loves it                           5 Format: Blu-rayVerified Pu~
+##  9 Nothing Quite Like It.                    5 Format: Prime VideoVerifie~
+## 10 Has pretty sweet bow skills.              5 Format: Blu-rayVerified Pu~
+## 
+## [[2]]
+## # A tibble: 10 x 3
+##    title                                 stars text                       
+##    &lt;chr&gt;                                 &lt;dbl&gt; &lt;chr&gt;                      
+##  1 Great                                     5 Format: DVDVerified Purcha~
+##  2 Fast delivery                             5 Format: DVDVerified Purcha~
+##  3 Lol                                       5 Format: DVDVerified Purcha~
+##  4 Vote For Pedro                            5 Format: DVDVerified Purcha~
+##  5 So funny!                                 5 Format: Prime VideoVerifie~
+##  6 Great move                                5 Format: Prime VideoVerifie~
+##  7 Refund needed. Did not pay through A~     1 Format: Prime VideoVerifie~
+##  8 Need a laugh?                             5 Format: DVDVerified Purcha~
+##  9 The greatest!                             5 Format: Prime VideoVerifie~
+## 10 Five Stars                                5 Format: Prime VideoVerifie~
+## 
+## [[3]]
+## # A tibble: 10 x 3
+##    title                             stars text                           
+##    &lt;chr&gt;                             &lt;dbl&gt; &lt;chr&gt;                          
+##  1 Napoleon Dynamite is an awesome ~     5 Format: Blu-rayVerified Purcha~
+##  2 One Star                              1 Format: Prime VideoVerified Pu~
+##  3 &quot;\U0001f62b&quot;                          5 Format: Prime VideoVerified Pu~
+##  4 Five Stars                            5 Format: DVDVerified Purchase   
+##  5 Haha                                  5 Format: Prime VideoVerified Pu~
+##  6 Five Stars                            5 Format: Prime VideoVerified Pu~
+##  7 Five Stars                            5 Format: Prime VideoVerified Pu~
+##  8 Hilarious                             5 Format: Prime VideoVerified Pu~
+##  9 Napoleon the wise                     5 Format: Prime VideoVerified Pu~
+## 10 Hilarious movie                       5 Format: Prime VideoVerified Pu~
+## 
+## [[4]]
+## # A tibble: 10 x 3
+##    title                            stars text                            
+##    &lt;chr&gt;                            &lt;dbl&gt; &lt;chr&gt;                           
+##  1 Loved it.                            5 Format: Prime VideoVerified Pur~
+##  2 Worth it ?                           3 Format: Blu-rayVerified Purchase
+##  3 &quot;Funniest \U0001f602 movie ever&quot;     5 Format: Prime VideoVerified Pur~
+##  4 Must Watch.                          5 Format: Prime VideoVerified Pur~
+##  5 Too funny to be real but could ~     5 Format: Prime VideoVerified Pur~
+##  6 Five Stars                           5 Format: Blu-rayVerified Purchase
+##  7 Wonderful condition                  5 Format: DVDVerified Purchase    
+##  8 Great family movie                   5 Format: Prime VideoVerified Pur~
+##  9 Five Stars                           5 Format: DVDVerified Purchase    
+## 10 TERRIBLE SOUND QUALITY               1 Format: Prime VideoVerified Pur~
+## 
+## [[5]]
+## # A tibble: 10 x 3
+##    title                                     stars text                   
+##    &lt;chr&gt;                                     &lt;dbl&gt; &lt;chr&gt;                  
+##  1 Kept most of my family entertained watch~     4 Format: Prime VideoVer~
+##  2 I lost my original copy of this quirky, ~     5 Format: Prime VideoVer~
+##  3 Five Stars                                    5 Format: Prime VideoVer~
+##  4 Nice ending.  Entertaining but not a mov~     4 Format: Prime VideoVer~
+##  5 &quot;\&quot;Tina, you fat lard\&quot; - Classic&quot;            5 Format: Prime VideoVer~
+##  6 I love this movie                             5 Format: DVDVerified Pu~
+##  7 One of the best movies of the 90s.            5 Format: Prime VideoVer~
+##  8 Four Stars                                    4 Format: Prime VideoVer~
+##  9 Fr                                            5 Format: DVDVerified Pu~
+## 10 Five Stars                                    5 Format: Blu-rayVerifie~</code></pre>
+</div>
+<div id="list-cols" class="section level2">
+<h2>List cols…</h2>
+<pre class="r"><code>library(rnoaa)
+
+weather = 
+  meteo_pull_monitors(c(&quot;USW00094728&quot;, &quot;USC00519397&quot;, &quot;USS0023B17S&quot;),
+                      var = c(&quot;PRCP&quot;, &quot;TMIN&quot;, &quot;TMAX&quot;), 
+                      date_min = &quot;2016-01-01&quot;,
+                      date_max = &quot;2016-12-31&quot;) %&gt;%
+  mutate(
+    name = recode(id, USW00094728 = &quot;CentralPark_NY&quot;, 
+                      USC00519397 = &quot;Waikiki_HA&quot;,
+                      USS0023B17S = &quot;Waterhole_WA&quot;),
+    tmin = tmin / 10,
+    tmax = tmax / 10) %&gt;%
+  select(name, id, everything())
+
+weather
+## # A tibble: 1,098 x 6
+##    name           id          date        prcp  tmax  tmin
+##    &lt;chr&gt;          &lt;chr&gt;       &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 CentralPark_NY USW00094728 2016-01-01     0   5.6   1.1
+##  2 CentralPark_NY USW00094728 2016-01-02     0   4.4   0  
+##  3 CentralPark_NY USW00094728 2016-01-03     0   7.2   1.7
+##  4 CentralPark_NY USW00094728 2016-01-04     0   2.2  -9.9
+##  5 CentralPark_NY USW00094728 2016-01-05     0  -1.6 -11.6
+##  6 CentralPark_NY USW00094728 2016-01-06     0   5    -3.8
+##  7 CentralPark_NY USW00094728 2016-01-07     0   7.8  -0.5
+##  8 CentralPark_NY USW00094728 2016-01-08     0   7.8  -0.5
+##  9 CentralPark_NY USW00094728 2016-01-09     0   8.3   4.4
+## 10 CentralPark_NY USW00094728 2016-01-10   457  15     4.4
+## # ... with 1,088 more rows</code></pre>
+<pre class="r"><code>weather_nest = 
+  nest(weather, date:tmin)
+
+weather_nest
+## # A tibble: 3 x 3
+##   name           id          data              
+##   &lt;chr&gt;          &lt;chr&gt;       &lt;list&gt;            
+## 1 CentralPark_NY USW00094728 &lt;tibble [366 x 4]&gt;
+## 2 Waikiki_HA     USC00519397 &lt;tibble [366 x 4]&gt;
+## 3 Waterhole_WA   USS0023B17S &lt;tibble [366 x 4]&gt;</code></pre>
+<pre class="r"><code>weather_nest %&gt;% 
+  pull(name)
+## [1] &quot;CentralPark_NY&quot; &quot;Waikiki_HA&quot;     &quot;Waterhole_WA&quot;
+
+weather_nest %&gt;% 
+  pull(id)
+## [1] &quot;USW00094728&quot; &quot;USC00519397&quot; &quot;USS0023B17S&quot;
+
+weather_nest %&gt;% 
+  pull(data)
+## [[1]]
+## # A tibble: 366 x 4
+##    date        prcp  tmax  tmin
+##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 2016-01-01     0   5.6   1.1
+##  2 2016-01-02     0   4.4   0  
+##  3 2016-01-03     0   7.2   1.7
+##  4 2016-01-04     0   2.2  -9.9
+##  5 2016-01-05     0  -1.6 -11.6
+##  6 2016-01-06     0   5    -3.8
+##  7 2016-01-07     0   7.8  -0.5
+##  8 2016-01-08     0   7.8  -0.5
+##  9 2016-01-09     0   8.3   4.4
+## 10 2016-01-10   457  15     4.4
+## # ... with 356 more rows
+## 
+## [[2]]
+## # A tibble: 366 x 4
+##    date        prcp  tmax  tmin
+##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 2016-01-01     0  29.4  16.7
+##  2 2016-01-02     0  28.3  16.7
+##  3 2016-01-03     0  28.3  16.7
+##  4 2016-01-04     0  28.3  16.1
+##  5 2016-01-05     0  27.2  16.7
+##  6 2016-01-06     0  27.2  20  
+##  7 2016-01-07    46  27.8  18.3
+##  8 2016-01-08     3  28.3  17.8
+##  9 2016-01-09     8  27.8  19.4
+## 10 2016-01-10     3  28.3  18.3
+## # ... with 356 more rows
+## 
+## [[3]]
+## # A tibble: 366 x 4
+##    date        prcp  tmax  tmin
+##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 2016-01-01     0   1.7  -5.9
+##  2 2016-01-02    25  -0.1  -6  
+##  3 2016-01-03     0  -5   -10  
+##  4 2016-01-04    25   0.3  -9.8
+##  5 2016-01-05    25   1.9  -1.8
+##  6 2016-01-06    25   1.4  -2.6
+##  7 2016-01-07     0   1.4  -3.9
+##  8 2016-01-08     0   1.1  -4  
+##  9 2016-01-09     0   1.4  -4.5
+## 10 2016-01-10     0   2.3  -3.8
+## # ... with 356 more rows</code></pre>
+<p>Unnesting…</p>
+<pre class="r"><code>weather_nest %&gt;% 
+  unnest
+## # A tibble: 1,098 x 6
+##    name           id          date        prcp  tmax  tmin
+##    &lt;chr&gt;          &lt;chr&gt;       &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 CentralPark_NY USW00094728 2016-01-01     0   5.6   1.1
+##  2 CentralPark_NY USW00094728 2016-01-02     0   4.4   0  
+##  3 CentralPark_NY USW00094728 2016-01-03     0   7.2   1.7
+##  4 CentralPark_NY USW00094728 2016-01-04     0   2.2  -9.9
+##  5 CentralPark_NY USW00094728 2016-01-05     0  -1.6 -11.6
+##  6 CentralPark_NY USW00094728 2016-01-06     0   5    -3.8
+##  7 CentralPark_NY USW00094728 2016-01-07     0   7.8  -0.5
+##  8 CentralPark_NY USW00094728 2016-01-08     0   7.8  -0.5
+##  9 CentralPark_NY USW00094728 2016-01-09     0   8.3   4.4
+## 10 CentralPark_NY USW00094728 2016-01-10   457  15     4.4
+## # ... with 1,088 more rows</code></pre>
+<p>look at LC elements</p>
+<pre class="r"><code>weather_nest$data[[1]] %&gt;%
+  skimr::skim()
+## Skim summary statistics
+##  n obs: 366 
+##  n variables: 4 
+## 
+## -- Variable type:Date ------------------------------------------------------------------------------------
+##  variable missing complete   n        min        max     median n_unique
+##      date       0      366 366 2016-01-01 2016-12-31 2016-07-01      366
+## 
+## -- Variable type:numeric ---------------------------------------------------------------------------------
+##  variable missing complete   n  mean    sd    p0   p25   p50  p75  p100
+##      prcp       0      366 366 29.3  78.66   0    0     0    10   587  
+##      tmax       0      366 366 18.13 10.02  -9.3 10    18.05 27.2  35.6
+##      tmin       0      366 366  9.91  9.18 -18.2  2.92  8.9  18.3  27.2
+##      hist
+##  &lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
+##  &lt;U+2581&gt;&lt;U+2582&gt;&lt;U+2585&gt;&lt;U+2586&gt;&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2587&gt;&lt;U+2586&gt;
+##  &lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2583&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2585&gt;&lt;U+2587&gt;&lt;U+2585&gt;</code></pre>
+<p>Fit a location-specific regression ..</p>
+<pre class="r"><code>lm(tmax ~tmin, data = weather_nest$data[[1]])
+## 
+## Call:
+## lm(formula = tmax ~ tmin, data = weather_nest$data[[1]])
+## 
+## Coefficients:
+## (Intercept)         tmin  
+##       7.779        1.045
+lm(tmax ~tmin, data = weather_nest$data[[2]])
+## 
+## Call:
+## lm(formula = tmax ~ tmin, data = weather_nest$data[[2]])
+## 
+## Coefficients:
+## (Intercept)         tmin  
+##      22.489        0.326
+lm(tmax ~tmin, data = weather_nest$data[[3]])
+## 
+## Call:
+## lm(formula = tmax ~ tmin, data = weather_nest$data[[3]])
+## 
+## Coefficients:
+## (Intercept)         tmin  
+##       6.851        1.245</code></pre>
+<p>Write a function!</p>
+<pre class="r"><code>weather_lm = function(df) {
+  lm(tmax ~ tmin, data = df)
+}</code></pre>
+<pre class="r"><code>weather_lm(df = weather_nest$data[[1]])
+## 
+## Call:
+## lm(formula = tmax ~ tmin, data = df)
+## 
+## Coefficients:
+## (Intercept)         tmin  
+##       7.779        1.045</code></pre>
+<pre class="r"><code>map(weather_nest$data, weather_lm)
+## [[1]]
+## 
+## Call:
+## lm(formula = tmax ~ tmin, data = df)
+## 
+## Coefficients:
+## (Intercept)         tmin  
+##       7.779        1.045  
+## 
+## 
+## [[2]]
+## 
+## Call:
+## lm(formula = tmax ~ tmin, data = df)
+## 
+## Coefficients:
+## (Intercept)         tmin  
+##      22.489        0.326  
+## 
+## 
+## [[3]]
+## 
+## Call:
+## lm(formula = tmax ~ tmin, data = df)
+## 
+## Coefficients:
+## (Intercept)         tmin  
+##       6.851        1.245</code></pre>
+<p>Save output as a new list column…</p>
+<pre class="r"><code>weather_nest %&gt;% 
+  mutate(lm_results = map(data, weather_lm))
+## # A tibble: 3 x 4
+##   name           id          data               lm_results
+##   &lt;chr&gt;          &lt;chr&gt;       &lt;list&gt;             &lt;list&gt;    
+## 1 CentralPark_NY USW00094728 &lt;tibble [366 x 4]&gt; &lt;S3: lm&gt;  
+## 2 Waikiki_HA     USC00519397 &lt;tibble [366 x 4]&gt; &lt;S3: lm&gt;  
+## 3 Waterhole_WA   USS0023B17S &lt;tibble [366 x 4]&gt; &lt;S3: lm&gt;</code></pre>
 </div>
 
 

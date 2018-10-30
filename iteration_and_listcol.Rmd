@@ -94,3 +94,168 @@ for (i in 1:4) {
 output
 ```
 
+Replace `for` loop with `map`
+
+```{r}
+
+output = map(df, mean_and_sd)
+output
+```
+
+Let's try a different function
+
+```{r}
+output = map(df, median)
+output
+
+output = map(df, summary)
+output
+```
+
+## map variant
+
+```{r}
+
+output = map_df(df, mean_and_sd)
+output
+
+output = map_dbl(df, median)
+output
+```
+
+## code syntax
+
+be clear about arguments
+
+```{r}
+output = map(.x = df, ~ mean_and_sd(x = .x))
+output
+```
+
+## Revisit Napolean Dynamite
+
+```{r}
+read_page_reviews <- function(url) {
+  
+  h = read_html(url)
+  
+  title = h %>%
+    html_nodes("#cm_cr-review_list .review-title") %>%
+    html_text()
+  
+  stars = h %>%
+    html_nodes("#cm_cr-review_list .review-rating") %>%
+    html_text() %>%
+    str_extract("\\d") %>%
+    as.numeric()
+  
+  text = h %>%
+    html_nodes(".review-data:nth-child(4)") %>%
+    html_text()
+  
+  data_frame(title, stars, text)
+}
+
+url_base = "https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&reviewerType=avp_only_reviews&sortBy=recent&pageNumber="
+
+vec_urls = str_c(url_base, 1:5)
+
+vec_urls
+
+# check that function works
+read_page_reviews(vec_urls[[1]])
+read_page_reviews(vec_urls[[2]])
+
+reviews = map(vec_urls, read_page_reviews)
+reviews
+```
+
+## List cols...
+
+```{r}
+library(rnoaa)
+
+weather = 
+  meteo_pull_monitors(c("USW00094728", "USC00519397", "USS0023B17S"),
+                      var = c("PRCP", "TMIN", "TMAX"), 
+                      date_min = "2016-01-01",
+                      date_max = "2016-12-31") %>%
+  mutate(
+    name = recode(id, USW00094728 = "CentralPark_NY", 
+                      USC00519397 = "Waikiki_HA",
+                      USS0023B17S = "Waterhole_WA"),
+    tmin = tmin / 10,
+    tmax = tmax / 10) %>%
+  select(name, id, everything())
+
+weather
+```
+
+```{r}
+weather_nest = 
+  nest(weather, date:tmin)
+
+weather_nest
+```
+
+
+
+```{r}
+weather_nest %>% 
+  pull(name)
+
+weather_nest %>% 
+  pull(id)
+
+weather_nest %>% 
+  pull(data)
+```
+
+Unnesting...
+
+```{r}
+weather_nest %>% 
+  unnest
+
+```
+
+look at LC elements
+
+```{r}
+weather_nest$data[[1]] %>%
+  skimr::skim()
+```
+
+Fit a location-specific regression ..
+
+```{r}
+lm(tmax ~tmin, data = weather_nest$data[[1]])
+lm(tmax ~tmin, data = weather_nest$data[[2]])
+lm(tmax ~tmin, data = weather_nest$data[[3]])
+```
+
+Write a function!
+
+```{r}
+weather_lm = function(df) {
+  lm(tmax ~ tmin, data = df)
+}
+```
+
+```{r}
+weather_lm(df = weather_nest$data[[1]])
+```
+
+```{r}
+map(weather_nest$data, weather_lm)
+```
+
+Save output as a new list column...
+
+```{r}
+weather_nest %>% 
+  mutate(lm_results = map(data, weather_lm))
+
+```
+
+
