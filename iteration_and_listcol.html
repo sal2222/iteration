@@ -149,7 +149,7 @@ l
 ## 
 ## $summary
 ##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## -3.01199 -0.68329 -0.01981 -0.01246  0.70018  2.74783</code></pre>
+## -3.62875 -0.75823 -0.00932 -0.05105  0.64448  3.21729</code></pre>
 </div>
 <div id="for-loops" class="section level2">
 <h2>for loops</h2>
@@ -163,14 +163,14 @@ l
 is.list(df)
 ## [1] TRUE
 df[[1]]
-##  [1] 1.9233393 1.6600265 4.3279375 2.2249346 4.1067572 2.8100025 3.7862814
-##  [8] 0.6745121 1.4831502 3.3494358 1.8318387 4.8473304 1.6399555 1.6223704
-## [15] 1.6912528 3.2019604 4.0516948 2.2204335 2.8520402 3.3491127
+##  [1] 3.4963219 2.7728102 4.2301695 3.5966124 1.7894788 3.8203194 2.7287885
+##  [8] 4.2419161 0.5804019 1.4825782 3.8918884 1.9473372 2.4804145 5.7197593
+## [15] 3.4640607 1.5845207 2.4654091 5.8585933 1.1234013 2.1101534
 df[[2]]
-##  [1]  0.18866591 11.39681168 -1.32807766  1.51317127  2.27698034
-##  [6]  3.84708741  2.57930686  6.87959176  0.07233594 -0.16243198
-## [11] -0.27387835  9.34341193 -3.49584655  1.61731595 10.15429348
-## [16]  6.17556888 -2.63629886  3.29540861 11.42478741 -1.79567238</code></pre>
+##  [1]  -6.6454670  -0.1218561   1.2289708  -3.7964717  -6.1837992
+##  [6] -14.1382303   2.5042857  -6.2017846  -1.4923059  -5.0319283
+## [11]   5.4278974  -1.6418549  -2.4893125  -0.5479515  -3.0880694
+## [16]   8.3120009  -0.5803640  -3.5764220  -0.2695859   4.7983154</code></pre>
 <p>Let’s get a function.</p>
 <pre class="r"><code>mean_and_sd = function(x) {
   
@@ -194,17 +194,17 @@ mean_and_sd(df[[1]])
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.68  1.15
+## 1  2.97  1.43
 mean_and_sd(df[[2]])
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  3.05  4.68
+## 1 -1.68  4.96
 mean_and_sd(df[[3]])
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  10.0 0.164</code></pre>
+## 1  10.1 0.193</code></pre>
 <p>Write a for loop</p>
 <pre class="r"><code>output = vector(&quot;list&quot;, length = 4)
 output
@@ -234,25 +234,25 @@ output
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.68  1.15
+## 1  2.97  1.43
 ## 
 ## [[2]]
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  3.05  4.68
+## 1 -1.68  4.96
 ## 
 ## [[3]]
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  10.0 0.164
+## 1  10.1 0.193
 ## 
 ## [[4]]
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1 -3.15  1.30</code></pre>
+## 1 -3.17 0.843</code></pre>
 <p>Replace <code>for</code> loop with <code>map</code></p>
 <pre class="r"><code>
 output = map(df, mean_and_sd)
@@ -261,57 +261,57 @@ output
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.68  1.15
+## 1  2.97  1.43
 ## 
 ## $b
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  3.05  4.68
+## 1 -1.68  4.96
 ## 
 ## $c
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  10.0 0.164
+## 1  10.1 0.193
 ## 
 ## $d
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1 -3.15  1.30</code></pre>
+## 1 -3.17 0.843</code></pre>
 <p>Let’s try a different function</p>
 <pre class="r"><code>output = map(df, median)
 output
 ## $a
-## [1] 2.517469
+## [1] 2.750799
 ## 
 ## $b
-## [1] 1.947148
+## [1] -1.56708
 ## 
 ## $c
-## [1] 10.03073
+## [1] 10.04682
 ## 
 ## $d
-## [1] -3.180133
+## [1] -3.295937
 
 output = map(df, summary)
 output
 ## $a
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.6745  1.6834  2.5175  2.6827  3.4586  4.8473 
+##  0.5804  1.9079  2.7508  2.9692  3.8382  5.8586 
 ## 
 ## $b
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## -3.4958 -0.1903  1.9471  3.0536  6.3516 11.4248 
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -14.1382  -4.1053  -1.5671  -1.6767   0.2159   8.3120 
 ## 
 ## $c
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   9.636   9.909  10.031  10.012  10.115  10.250 
+##   9.654   9.953  10.047  10.069  10.203  10.392 
 ## 
 ## $d
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## -5.7669 -4.1311 -3.1801 -3.1459 -2.3523 -0.8418</code></pre>
+##  -4.654  -3.673  -3.296  -3.171  -2.596  -1.726</code></pre>
 </div>
 <div id="map-variant" class="section level2">
 <h2>map variant</h2>
@@ -321,15 +321,15 @@ output
 ## # A tibble: 4 x 2
 ##     mean    sd
 ##    &lt;dbl&gt; &lt;dbl&gt;
-## 1   2.68 1.15 
-## 2   3.05 4.68 
-## 3  10.0  0.164
-## 4  -3.15 1.30
+## 1   2.97 1.43 
+## 2  -1.68 4.96 
+## 3  10.1  0.193
+## 4  -3.17 0.843
 
 output = map_dbl(df, median)
 output
 ##         a         b         c         d 
-##  2.517469  1.947148 10.030734 -3.180133</code></pre>
+##  2.750799 -1.567080 10.046823 -3.295937</code></pre>
 </div>
 <div id="code-syntax" class="section level2">
 <h2>code syntax</h2>
@@ -340,25 +340,25 @@ output
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.68  1.15
+## 1  2.97  1.43
 ## 
 ## $b
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  3.05  4.68
+## 1 -1.68  4.96
 ## 
 ## $c
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  10.0 0.164
+## 1  10.1 0.193
 ## 
 ## $d
 ## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1 -3.15  1.30</code></pre>
+## 1 -3.17 0.843</code></pre>
 </div>
 <div id="revisit-napolean-dynamite" class="section level2">
 <h2>Revisit Napolean Dynamite</h2>
@@ -399,30 +399,30 @@ read_page_reviews(vec_urls[[1]])
 ## # A tibble: 10 x 3
 ##    title                                 stars text                       
 ##    &lt;chr&gt;                                 &lt;dbl&gt; &lt;chr&gt;                      
-##  1 Great Movie                               5 Format: Prime VideoVerifie~
-##  2 True to life!                             5 Format: Prime VideoVerifie~
-##  3 Classic family friendly comedy kids ~     5 Format: Prime VideoVerifie~
-##  4 &quot;Great \&quot;Odd Ball\&quot; movie to watch&quot;       5 Format: Prime VideoVerifie~
-##  5 Nostalgic Stupidity                       4 Format: Prime VideoVerifie~
-##  6 Happy                                     5 Format: DVDVerified Purcha~
-##  7 Go watch THE ROCK or dumb &amp; dumber i~     2 Format: Prime VideoVerifie~
-##  8 My mom loves it                           5 Format: Blu-rayVerified Pu~
-##  9 Nothing Quite Like It.                    5 Format: Prime VideoVerifie~
-## 10 Has pretty sweet bow skills.              5 Format: Blu-rayVerified Pu~
+##  1 &quot;\U0001f64f\U0001f3fb&quot;                    5 Format: DVDVerified Purcha~
+##  2 Great Movie                               5 Format: Prime VideoVerifie~
+##  3 True to life!                             5 Format: Prime VideoVerifie~
+##  4 Classic family friendly comedy kids ~     5 Format: Prime VideoVerifie~
+##  5 &quot;Great \&quot;Odd Ball\&quot; movie to watch&quot;       5 Format: Prime VideoVerifie~
+##  6 Nostalgic Stupidity                       4 Format: Prime VideoVerifie~
+##  7 Happy                                     5 Format: DVDVerified Purcha~
+##  8 Go watch THE ROCK or dumb &amp; dumber i~     2 Format: Prime VideoVerifie~
+##  9 My mom loves it                           5 Format: Blu-rayVerified Pu~
+## 10 Nothing Quite Like It.                    5 Format: Prime VideoVerifie~
 read_page_reviews(vec_urls[[2]])
 ## # A tibble: 10 x 3
 ##    title                                 stars text                       
 ##    &lt;chr&gt;                                 &lt;dbl&gt; &lt;chr&gt;                      
-##  1 Great                                     5 Format: DVDVerified Purcha~
-##  2 Fast delivery                             5 Format: DVDVerified Purcha~
-##  3 Lol                                       5 Format: DVDVerified Purcha~
-##  4 Vote For Pedro                            5 Format: DVDVerified Purcha~
-##  5 So funny!                                 5 Format: Prime VideoVerifie~
-##  6 Great move                                5 Format: Prime VideoVerifie~
-##  7 Refund needed. Did not pay through A~     1 Format: Prime VideoVerifie~
-##  8 Need a laugh?                             5 Format: DVDVerified Purcha~
-##  9 The greatest!                             5 Format: Prime VideoVerifie~
-## 10 Five Stars                                5 Format: Prime VideoVerifie~
+##  1 Has pretty sweet bow skills.              5 Format: Blu-rayVerified Pu~
+##  2 Great                                     5 Format: DVDVerified Purcha~
+##  3 Fast delivery                             5 Format: DVDVerified Purcha~
+##  4 Lol                                       5 Format: DVDVerified Purcha~
+##  5 Vote For Pedro                            5 Format: DVDVerified Purcha~
+##  6 So funny!                                 5 Format: Prime VideoVerifie~
+##  7 Great move                                5 Format: Prime VideoVerifie~
+##  8 Refund needed. Did not pay through A~     1 Format: Prime VideoVerifie~
+##  9 Need a laugh?                             5 Format: DVDVerified Purcha~
+## 10 The greatest!                             5 Format: Prime VideoVerifie~
 
 reviews = map(vec_urls, read_page_reviews)
 reviews
@@ -430,61 +430,61 @@ reviews
 ## # A tibble: 10 x 3
 ##    title                                 stars text                       
 ##    &lt;chr&gt;                                 &lt;dbl&gt; &lt;chr&gt;                      
-##  1 Great Movie                               5 Format: Prime VideoVerifie~
-##  2 True to life!                             5 Format: Prime VideoVerifie~
-##  3 Classic family friendly comedy kids ~     5 Format: Prime VideoVerifie~
-##  4 &quot;Great \&quot;Odd Ball\&quot; movie to watch&quot;       5 Format: Prime VideoVerifie~
-##  5 Nostalgic Stupidity                       4 Format: Prime VideoVerifie~
-##  6 Happy                                     5 Format: DVDVerified Purcha~
-##  7 Go watch THE ROCK or dumb &amp; dumber i~     2 Format: Prime VideoVerifie~
-##  8 My mom loves it                           5 Format: Blu-rayVerified Pu~
-##  9 Nothing Quite Like It.                    5 Format: Prime VideoVerifie~
-## 10 Has pretty sweet bow skills.              5 Format: Blu-rayVerified Pu~
+##  1 &quot;\U0001f64f\U0001f3fb&quot;                    5 Format: DVDVerified Purcha~
+##  2 Great Movie                               5 Format: Prime VideoVerifie~
+##  3 True to life!                             5 Format: Prime VideoVerifie~
+##  4 Classic family friendly comedy kids ~     5 Format: Prime VideoVerifie~
+##  5 &quot;Great \&quot;Odd Ball\&quot; movie to watch&quot;       5 Format: Prime VideoVerifie~
+##  6 Nostalgic Stupidity                       4 Format: Prime VideoVerifie~
+##  7 Happy                                     5 Format: DVDVerified Purcha~
+##  8 Go watch THE ROCK or dumb &amp; dumber i~     2 Format: Prime VideoVerifie~
+##  9 My mom loves it                           5 Format: Blu-rayVerified Pu~
+## 10 Nothing Quite Like It.                    5 Format: Prime VideoVerifie~
 ## 
 ## [[2]]
 ## # A tibble: 10 x 3
 ##    title                                 stars text                       
 ##    &lt;chr&gt;                                 &lt;dbl&gt; &lt;chr&gt;                      
-##  1 Great                                     5 Format: DVDVerified Purcha~
-##  2 Fast delivery                             5 Format: DVDVerified Purcha~
-##  3 Lol                                       5 Format: DVDVerified Purcha~
-##  4 Vote For Pedro                            5 Format: DVDVerified Purcha~
-##  5 So funny!                                 5 Format: Prime VideoVerifie~
-##  6 Great move                                5 Format: Prime VideoVerifie~
-##  7 Refund needed. Did not pay through A~     1 Format: Prime VideoVerifie~
-##  8 Need a laugh?                             5 Format: DVDVerified Purcha~
-##  9 The greatest!                             5 Format: Prime VideoVerifie~
-## 10 Five Stars                                5 Format: Prime VideoVerifie~
+##  1 Has pretty sweet bow skills.              5 Format: Blu-rayVerified Pu~
+##  2 Great                                     5 Format: DVDVerified Purcha~
+##  3 Fast delivery                             5 Format: DVDVerified Purcha~
+##  4 Lol                                       5 Format: DVDVerified Purcha~
+##  5 Vote For Pedro                            5 Format: DVDVerified Purcha~
+##  6 So funny!                                 5 Format: Prime VideoVerifie~
+##  7 Great move                                5 Format: Prime VideoVerifie~
+##  8 Refund needed. Did not pay through A~     1 Format: Prime VideoVerifie~
+##  9 Need a laugh?                             5 Format: DVDVerified Purcha~
+## 10 The greatest!                             5 Format: Prime VideoVerifie~
 ## 
 ## [[3]]
 ## # A tibble: 10 x 3
 ##    title                             stars text                           
 ##    &lt;chr&gt;                             &lt;dbl&gt; &lt;chr&gt;                          
-##  1 Napoleon Dynamite is an awesome ~     5 Format: Blu-rayVerified Purcha~
-##  2 One Star                              1 Format: Prime VideoVerified Pu~
-##  3 &quot;\U0001f62b&quot;                          5 Format: Prime VideoVerified Pu~
-##  4 Five Stars                            5 Format: DVDVerified Purchase   
-##  5 Haha                                  5 Format: Prime VideoVerified Pu~
-##  6 Five Stars                            5 Format: Prime VideoVerified Pu~
+##  1 Five Stars                            5 Format: Prime VideoVerified Pu~
+##  2 Napoleon Dynamite is an awesome ~     5 Format: Blu-rayVerified Purcha~
+##  3 One Star                              1 Format: Prime VideoVerified Pu~
+##  4 &quot;\U0001f62b&quot;                          5 Format: Prime VideoVerified Pu~
+##  5 Five Stars                            5 Format: DVDVerified Purchase   
+##  6 Haha                                  5 Format: Prime VideoVerified Pu~
 ##  7 Five Stars                            5 Format: Prime VideoVerified Pu~
-##  8 Hilarious                             5 Format: Prime VideoVerified Pu~
-##  9 Napoleon the wise                     5 Format: Prime VideoVerified Pu~
-## 10 Hilarious movie                       5 Format: Prime VideoVerified Pu~
+##  8 Five Stars                            5 Format: Prime VideoVerified Pu~
+##  9 Hilarious                             5 Format: Prime VideoVerified Pu~
+## 10 Napoleon the wise                     5 Format: Prime VideoVerified Pu~
 ## 
 ## [[4]]
 ## # A tibble: 10 x 3
-##    title                            stars text                            
-##    &lt;chr&gt;                            &lt;dbl&gt; &lt;chr&gt;                           
-##  1 Loved it.                            5 Format: Prime VideoVerified Pur~
-##  2 Worth it ?                           3 Format: Blu-rayVerified Purchase
-##  3 &quot;Funniest \U0001f602 movie ever&quot;     5 Format: Prime VideoVerified Pur~
-##  4 Must Watch.                          5 Format: Prime VideoVerified Pur~
-##  5 Too funny to be real but could ~     5 Format: Prime VideoVerified Pur~
-##  6 Five Stars                           5 Format: Blu-rayVerified Purchase
-##  7 Wonderful condition                  5 Format: DVDVerified Purchase    
-##  8 Great family movie                   5 Format: Prime VideoVerified Pur~
-##  9 Five Stars                           5 Format: DVDVerified Purchase    
-## 10 TERRIBLE SOUND QUALITY               1 Format: Prime VideoVerified Pur~
+##    title                           stars text                             
+##    &lt;chr&gt;                           &lt;dbl&gt; &lt;chr&gt;                            
+##  1 Hilarious movie                     5 Format: Prime VideoVerified Purc~
+##  2 Loved it.                           5 Format: Prime VideoVerified Purc~
+##  3 Worth it ?                          3 Format: Blu-rayVerified Purchase 
+##  4 &quot;Funniest \U0001f602 movie eve~     5 Format: Prime VideoVerified Purc~
+##  5 Must Watch.                         5 Format: Prime VideoVerified Purc~
+##  6 Five Stars                          5 Format: Blu-rayVerified Purchase 
+##  7 Wonderful condition                 5 Format: DVDVerified Purchase     
+##  8 Great family movie                  5 Format: Prime VideoVerified Purc~
+##  9 Five Stars                          5 Format: DVDVerified Purchase     
+## 10 TERRIBLE SOUND QUALITY              1 Format: Prime VideoVerified Purc~
 ## 
 ## [[5]]
 ## # A tibble: 10 x 3
@@ -712,6 +712,58 @@ lm(tmax ~tmin, data = weather_nest$data[[3]])
 ## 1 CentralPark_NY USW00094728 &lt;tibble [366 x 4]&gt; &lt;S3: lm&gt;  
 ## 2 Waikiki_HA     USC00519397 &lt;tibble [366 x 4]&gt; &lt;S3: lm&gt;  
 ## 3 Waterhole_WA   USS0023B17S &lt;tibble [366 x 4]&gt; &lt;S3: lm&gt;</code></pre>
+<p>More examples…</p>
+<pre class="r"><code>read_page_reviews &lt;- function(url) {
+  
+  h = read_html(url)
+  
+  review_titles = h %&gt;%
+    html_nodes(&quot;#cm_cr-review_list .review-title&quot;) %&gt;%
+    html_text()
+  
+  review_stars = h %&gt;%
+    html_nodes(&quot;#cm_cr-review_list .review-rating&quot;) %&gt;%
+    html_text() %&gt;%
+    str_extract(&quot;\\d&quot;) %&gt;%
+    as.numeric()
+  
+  review_text = h %&gt;%
+    html_nodes(&quot;.review-data:nth-child(4)&quot;) %&gt;%
+    html_text()
+  
+  tibble(
+    title = review_titles,
+    stars = review_stars,
+    text = review_text
+  )
+}
+
+
+
+url_base = &quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=&quot;
+
+urls = str_c(url_base, 1:5)
+</code></pre>
+<pre class="r"><code>tibble(
+    page = 1:5,
+    url = str_c(url_base, page)
+) %&gt;% 
+  mutate(reviews = map(url, read_page_reviews)) %&gt;% 
+  unnest()
+## # A tibble: 50 x 5
+##     page url                       title              stars text          
+##    &lt;int&gt; &lt;chr&gt;                     &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;         
+##  1     1 https://www.amazon.com/p~ &quot;\U0001f64f\U0001~     5 Format: DVDVe~
+##  2     1 https://www.amazon.com/p~ Great Movie            5 Format: Prime~
+##  3     1 https://www.amazon.com/p~ True to life!          5 Format: Prime~
+##  4     1 https://www.amazon.com/p~ Classic family fr~     5 Format: Prime~
+##  5     1 https://www.amazon.com/p~ &quot;Great \&quot;Odd Ball~     5 Format: Prime~
+##  6     1 https://www.amazon.com/p~ Nostalgic Stupidi~     4 Format: Prime~
+##  7     1 https://www.amazon.com/p~ Happy                  5 Format: DVDVe~
+##  8     1 https://www.amazon.com/p~ Go watch THE ROCK~     2 Format: Prime~
+##  9     1 https://www.amazon.com/p~ My mom loves it        5 Format: Blu-r~
+## 10     1 https://www.amazon.com/p~ Nothing Quite Lik~     5 Format: Prime~
+## # ... with 40 more rows</code></pre>
 </div>
 
 
